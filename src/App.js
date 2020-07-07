@@ -2,6 +2,9 @@ import React,{Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+import ReactTable from "react-table";
+import "react-table/react-table.css";
+
 class App extends Component {
   constructor(props)
   {
@@ -27,7 +30,16 @@ class App extends Component {
   }
 
   render(){
-    const td=this.state.data.map((item,index)=><tr><td>{item.full_name}</td><td><a href={item.html_url}>{item.html_url}</a></td></tr>);
+    const col=[{
+      Header:'Name',
+      accessor:'full_name',
+    },{
+      Header:'URL',
+      accessor:'html_url',
+    },{
+      Header:'Owner',
+      accessor:'owner.login',
+    }];
 
     return (
       <div className="App">
@@ -35,7 +47,7 @@ class App extends Component {
           <input onChange={this.changed} value={this.state.input} type='text' placeholder='input search content'/>
           <input type="submit" value="search" />
         </form>
-        <table>{td}</table>
+        <ReactTable data={this.state.data} columns={col} filterable={true} defaultPageSize={10}/>
       </div>
     );
   }
