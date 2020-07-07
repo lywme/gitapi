@@ -39,17 +39,26 @@ class App extends Component {
     },{
       Header:'Owner',
       accessor:'owner.login',
+    },{
+      id:'button',
+      sortable:false,
+      filterable:false,
+      width:100,
+      accessor:'full_name',
+      Cell:({value})=>(<button type='button'>press me</button>)
     }];
 
-    return (
-      <div className="App">
-        <form onSubmit={this.submitForm}>
-          <input onChange={this.changed} value={this.state.input} type='text' placeholder='input search content'/>
-          <input type="submit" value="search" />
-        </form>
-        <ReactTable data={this.state.data} columns={col} filterable={true} defaultPageSize={10}/>
-      </div>
-    );
+  
+
+  return (
+    <div className="App">
+      <form onSubmit={this.submitForm}>
+        <input onChange={this.changed} value={this.state.input} type='text' placeholder='input search content'/>
+        <input type="submit" value="search" />
+      </form>
+      <ReactTable data={this.state.data} columns={col} filterable={true} defaultPageSize={10}/>
+    </div>
+  );
   }
 
 }
